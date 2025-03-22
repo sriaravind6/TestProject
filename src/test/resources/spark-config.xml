@@ -1,0 +1,17 @@
+<configuration>
+    <theme>standard</theme>
+    <encoding>utf-8</encoding>
+    <protocol>https</protocol>
+    <timelineEnabled>true</timelineEnabled>
+    <offlineMode>true</offlineMode>
+    <documentTitle>Extent Report</documentTitle>
+    <reportName>My Custom Report</reportName>
+    <timeStampFormat>MMM dd, yyyy HH:mm:ss</timeStampFormat>
+    <css>
+        .badge { font-size: 14px; }
+        .card { border-radius: 8px; }
+    </css>
+    <js>
+        console.log('Custom JS loaded');
+    </js>
+</configuration>

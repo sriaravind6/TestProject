@@ -1,0 +1,11 @@
+<configuration>
+    <encoding>UTF-8</encoding>
+    <protocol>https</protocol>
+    <title>Extent Report</title>
+    <reportName>Automation Test Report</reportName>
+    <theme>standard</theme>
+    <timeStampFormat>MMM dd, yyyy HH:mm:ss</timeStampFormat>
+    <documentTitle>Test Report</documentTitle>
+    <css></css>
+    <js></js>
+</configuration>
