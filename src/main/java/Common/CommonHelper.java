@@ -6,6 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.time.Duration;
 import java.util.*;
+
 
 public class CommonHelper extends WebPropertyHelpper{
     public static LinkedHashMap<Integer,LinkedHashMap<String,String>> dataList = new LinkedHashMap<>();
@@ -263,6 +265,57 @@ public class CommonHelper extends WebPropertyHelpper{
             driver.get(url);
         }catch (Exception e){
             throw new RuntimeException("Failed to open new tab and driver: " + e.getMessage());
+        }
+    }
+
+    public void switchToAlertAndAccept(){
+        try {
+            driver.switchTo().alert().accept();
+        }catch (Exception e){
+            throw new RuntimeException("Failed to switch to alert: " + e.getMessage());
+        }
+    }
+
+    public void switchToAlertAndDismiss(){
+        try {
+            driver.switchTo().alert().dismiss();
+        }catch (Exception e){
+            throw new RuntimeException("Failed to switch to alert: " + e.getMessage());
+        }
+    }
+
+    public void switchToAlertAndSendKeys(String input){
+        try {
+            driver.switchTo().alert().sendKeys(input);
+        }catch (Exception e){
+            throw new RuntimeException("Failed to switch to alert: " + e.getMessage());
+        }
+    }
+
+    public WebElement getElementBy(LocatorType type, String value) {
+        try {
+            switch (type) {
+                case ID:
+                    return driver.findElement(By.id(value));
+                case NAME:
+                    return driver.findElement(By.name(value));
+                case CLASSNAME:
+                    return driver.findElement(By.className(value));
+                case TAGNAME:
+                    return driver.findElement(By.tagName(value));
+                case XPATH:
+                    return driver.findElement(By.xpath(value));
+                case CSS:
+                    return driver.findElement(By.cssSelector(value));
+                case LINKTEXT:
+                    return driver.findElement(By.linkText(value));
+                case PARTIALLINKTEXT:
+                    return driver.findElement(By.partialLinkText(value));
+                default:
+                    throw new IllegalArgumentException("Invalid locator type: " + type);
+            }
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Element not found using " + type + " with value: " + value, e);
         }
     }
 }
