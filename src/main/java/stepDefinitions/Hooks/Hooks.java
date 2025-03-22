@@ -57,7 +57,7 @@ public class Hooks extends CommonHelper {
 
         // Send the Extent Report via email
         String reportPath = "target/ExtentReport.html";
-        EmailUtil.sendEmailWithAttachment("aravindeee218@gmail.comq.com", "Test Report", "Please find the attached test report.", reportPath);
+        EmailUtil.sendEmailWithAttachment("aravindeee218@gmail.com", "Test Report", "Please find the attached test report.", reportPath);
 
     }
 }
