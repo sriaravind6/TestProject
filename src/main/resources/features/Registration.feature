@@ -1,6 +1,7 @@
 Feature: Registration.feature
 
-  @Smoke
+  @createAccount
   Scenario: use create an account
     Given user launch bowser and open the "castcoappurl"
-    When user create an account from home page
+    When user click on the "Sign In / Register" button
+    Then user create an account from home page

@@ -80,14 +80,16 @@ public class CommonHelper extends WebPropertyHelpper{
     }
 
     public String getElementText(WebElement element) {
+        String returnText = "";
         try {
             if (isElementPresent(element)) {
-                return element.getText();
+                returnText=element.getText();
+                return returnText ;
             }
         } catch (Exception e) {
             throw new RuntimeException("Failed to get text: " + e.getMessage());
         }
-        return "";
+        return returnText;
     }
 
     public void scrollToElement(WebElement element) {
@@ -140,7 +142,11 @@ public class CommonHelper extends WebPropertyHelpper{
     }
 
     public String getRandomUserId(){
-        return "Test"+getRandomAlphanumeric(6)+"@yopmail.com";
+        return "Test"+getRandomAlphanumeric(8)+"@yopmail.com";
+    }
+
+    public String getRandomAlphaMailId(){
+        return "test"+getRandomAlpha(12)+"@yopmail.com";
     }
 
     public LinkedHashMap<Integer,LinkedHashMap<String,String>> getDataFromExcell(String filePath,String sheetName) {
@@ -316,6 +322,25 @@ public class CommonHelper extends WebPropertyHelpper{
             }
         } catch (NoSuchElementException e) {
             throw new RuntimeException("Element not found using " + type + " with value: " + value, e);
+        }
+    }
+
+    public void moveToElementCenterAndClick(WebElement element) {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", element);
+            js.executeScript("arguments[0].click();", element);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to move to element center and click: " + e.getMessage());
+        }
+    }
+
+    public void waitForDOMLoad(int waitTime) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
+            wait.until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to wait for DOM to load: " + e.getMessage());
         }
     }
 }
