@@ -1,50 +1,48 @@
 package PageObjectModel;
 
 import Common.CommonHelper;
-import Common.WebPropertyHelpper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 
 public class Registration_PO extends CommonHelper {
-    CommonHelper common = new CommonHelper();
-    @FindBy(xpath = "//td[@class='login_register']")
-    public WebElement registrationBtn;
-    @FindBy(id = "username")
-    public WebElement userNameTxt;
-    @FindBy(id = "password")
-    public WebElement passwordTxt;
-    @FindBy(id = "re_password")
-    public WebElement rePasswordTxt;
-    @FindBy(id = "full_name")
-    public WebElement fullNameTxt;
-    @FindBy(id = "email_add")
-    public WebElement emailTxt;
-    @FindBy(id = "tnc_box")
-    public WebElement checkBox;
-    @FindBy(xpath = "//input[@value='Register']")
-    public WebElement registerBtn;
-    @FindBy(xpath = "//span[@class='register_msg']")
-    public WebElement registerationSucessMsgTxt;
-    @FindBy(xpath = "//a[text()='Click here to login']")
-    public WebElement clickHereToLoginBtn;
+//    CommonHelper common = new CommonHelper();
+    public static String signInUser;
+    @FindBy(xpath = "//h1[@id='createAccountHeader']")
+    public WebElement accountHeaderTxt;
+    @FindBy(xpath = "//input[@id='email']")
+    public WebElement emailTxtBox;
+    @FindBy(xpath = "//input[@id='newPassword']")
+    public WebElement passwordTxtBox;
+    @FindBy(xpath = "//input[@id='reenterPassword']")
+    public WebElement confirmPasswordTxtBox;
+    @FindBy(xpath = "//button[@id='continue']")
+    public WebElement continueBtn;
+    @FindBy(xpath = "//h1[@automation-id='linkYourMembership']")
+    public WebElement linkYourMembershipTxt;
+    @FindBy(xpath = "//input[@id='shopAsNonMemberBtn']")
+    public WebElement shopAsNonMemberBtn;
+    @FindBy(xpath = "//div[@data-testid='SearchBarUI']/parent::div/parent::div/following-sibling::div//li/a[@aria-label='Orders & Returns']/../preceding-sibling::li//button//div[@data-testid='Text_myaccount']")
+    public WebElement myAccountBtn;
+    @FindBy(xpath="//a[@id='createAccount']")
+    public WebElement createAccountBtn;
 
 
     //=============================Methods============================================//
 
-    public void createNewAccount() throws InterruptedException {
-        common.clickOnElement(registrationBtn);
-        common.clickAndSetInput(userNameTxt,getRandomUserName());
-        common.clickAndSetInput(passwordTxt, WebPropertyHelpper.getDataFromPropertyFile("commonPasscode"));
-        common.clickAndSetInput(rePasswordTxt, WebPropertyHelpper.getDataFromPropertyFile("commonPasscode"));
-        common.clickAndSetInput(fullNameTxt,getRandomAlpha(7).toUpperCase());
-        common.clickAndSetInput(emailTxt,getRandomUserId());
-        sleep(10000);
-        common.clickOnElement(checkBox);
-        common.clickOnElement(registerBtn);
-        sleep(10000);
-        Assert.assertTrue(isElementDisplayed(clickHereToLoginBtn,10),"Element not displayed");
-        Assert.assertEquals(driver.getCurrentUrl(),"https://adactinhotelapp.com/Register.php","user not registered");
+    public void createNewAccount()  {
+        signInUser = getRandomAlphaMailId().toLowerCase();
+        System.out.println("User email: "+signInUser);
+        Assert.assertTrue(clickOnElement(createAccountBtn),"Create account button not displayed");
+        Assert.assertTrue(isElementDisplayed(accountHeaderTxt,10),"Account header not displayed");
+        clickAndSetInput(emailTxtBox,signInUser);
+        clickAndSetInput(passwordTxtBox,getDataFromPropertyFile("commonPasscode"));
+        clickAndSetInput(confirmPasswordTxtBox,getDataFromPropertyFile("commonPasscode"));
+        moveToElementCenterAndClick(continueBtn);
+        waitForDOMLoad(30);
+        isElementDisplayed(linkYourMembershipTxt,60);
+        Assert.assertTrue(clickOnElement(shopAsNonMemberBtn),"Shop as non member button not displayed");
+        Assert.assertTrue(isElementDisplayed(myAccountBtn,10),"My account button not displayed");
     }
 }
