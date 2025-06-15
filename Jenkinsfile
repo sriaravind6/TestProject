@@ -11,12 +11,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                bat 'mvn clean install -DskipTests'
             }
         }
         stage('Run Cucumber Tests') {
             steps {
-                sh "mvn test -Dcucumber.filter.tags=${params.TAG}"
+                bat "mvn test -Dcucumber.filter.tags=%TAG%"
             }
         }
     }
