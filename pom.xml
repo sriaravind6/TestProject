@@ -141,6 +141,11 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.0.0</version>
             </plugin>
+            <plugin>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.5.3</version>
+            </plugin>
         </plugins>
     </build>
 
