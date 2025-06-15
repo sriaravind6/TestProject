@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
         features = "src/main/resources/features",
         glue = {"stepDefinitions"},
         dryRun = false,
-        tags = "@createAccount",
+        tags = "@Login",
         monochrome = true,
         stepNotifications = true
 )

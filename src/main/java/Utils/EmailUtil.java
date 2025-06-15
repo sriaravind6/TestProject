@@ -68,6 +68,7 @@ public class EmailUtil {
         props.put("mail.smtp.auth", "true");                    // Enable authentication
         props.put("mail.smtp.starttls.enable", "true");         // Enable STARTTLS for security
 
+
         // Gmail Credentials (Use App Password if 2FA is enabled)
         final String senderEmail = "aravindeee18@gmail.com";
         final String appPassword = "8143224606";
