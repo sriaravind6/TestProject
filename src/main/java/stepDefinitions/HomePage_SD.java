@@ -40,7 +40,7 @@ public class HomePage_SD extends CommonHelper {
     @Given("user click on the {string} button")
     public void user_click_on_the_button(String buttonName) {
         switch (buttonName) {
-            case "Sign In / Register":
+            case "Sign In Button":
                 homePagePo.clickOnSignInBtn();
                 break;
             case "Orders & Returns":
@@ -51,6 +51,9 @@ public class HomePage_SD extends CommonHelper {
                 break;
             case "Shop":
                 homePagePo.clickOnShopBtn();
+                break;
+            case "Sign In Icon":
+                homePagePo.clickOnSignInIconBtn();
                 break;
             default:
                 fail("Button not found");

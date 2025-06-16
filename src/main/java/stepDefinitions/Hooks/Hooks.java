@@ -56,8 +56,8 @@ public class Hooks extends CommonHelper {
         driver.quit();
 
         // Send the Extent Report via email
-        String reportPath = "target/ExtentReport.html";
-        EmailUtil.sendEmailWithAttachment("aravindeee218@gmail.com", "Test Report", "Please find the attached test report.", reportPath);
+//        String reportPath = "target/ExtentReport.html";
+//        EmailUtil.sendEmailWithAttachment("aravindeee218@gmail.com", "Test Report", "Please find the attached test report.", reportPath);
 
     }
 }

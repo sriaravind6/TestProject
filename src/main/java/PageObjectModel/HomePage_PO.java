@@ -7,8 +7,10 @@ import org.testng.Assert;
 
 public class HomePage_PO extends CommonHelper {
     CommonHelper common = new CommonHelper();
-    @FindBy(xpath = "//div[@data-testid='SearchBarUI']/parent::div/parent::div/following-sibling::div//li/a[@aria-label='Orders & Returns']/../preceding-sibling::li//button//div[@data-testid='Text_signin' and text()='Sign In / Register']")
+    @FindBy(xpath = "//button[normalize-space()='Sign In']")
     public WebElement signInBtn;
+    @FindBy(xpath="//button[@title='Sign In']")
+    public WebElement signInBtnIcon;
     @FindBy(xpath="//div[@data-testid='SearchBarUI']/parent::div/parent::div/following-sibling::div//li/a[@aria-label='Orders & Returns']")
     public WebElement ordersAndReturnsBtn;
     @FindBy(xpath = "//div[@data-testid='SearchBarUI']/parent::div/parent::div/following-sibling::div//li/a[@aria-label='Orders & Returns']/parent::li/following-sibling::li/a[@aria-label='Cart']")
@@ -25,6 +27,9 @@ public class HomePage_PO extends CommonHelper {
 //=======================================Methods============================================//
     public void clickOnSignInBtn() {
         Assert.assertTrue( common.clickOnElement(signInBtn),"signin button not displayed");
+    }
+    public void clickOnSignInIconBtn() {
+        Assert.assertTrue( common.clickOnElement(signInBtnIcon),"signin icon button not displayed");
     }
     public void clickOnOrdersAndReturnsBtn() {
         Assert.assertTrue(common.clickOnElement(ordersAndReturnsBtn),"Orders and Returns button not displayed");
