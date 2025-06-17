@@ -2,6 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'TAG', defaultValue: '@smoke', description: 'Cucumber tag to run')
+        string(name: 'FEATURE_PATH', defaultValue: 'src/test/resources/features/', description: 'Path to feature files')
     }
     stages {
         stage('Checkout') {
@@ -16,7 +17,7 @@ pipeline {
         }
         stage('Run Cucumber Tests') {
             steps {
-                bat "mvn test -Dcucumber.filter.tags=%TAG%"
+                bat "mvn test -Dcucumber.filter.tags=%TAG% -Dcucumber.features=%FEATURE_PATH%"
             }
         }
     }
