@@ -40,7 +40,6 @@ public class Hooks extends CommonHelper {
             ExtentReportManager.test.pass("Scenario Passed: " + scenario.getName());
         }
         ExtentReportManager.flushReport();
-        System.out.println("Closing the browser...");
         if (scenario.isFailed()) {
             TakesScreenshot ts = (TakesScreenshot) driver;
             byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);

@@ -28,7 +28,10 @@ public class WebPropertyHelpper extends Base {
     public static WebDriver browserLaunch(String browserType){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-blink-features=AutomationControlled");
-//        options.addArguments("--headless"); // Run in headless mode
+        String headless = System.getProperty("headless");
+        if ("true".equalsIgnoreCase(headless)) {
+            options.addArguments("--headless");
+        }
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
